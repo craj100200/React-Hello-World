@@ -68,3 +68,91 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### STEPS TO CREATE THE PROJECT 
+
+=====================================================================
+STEP 1 : Create React App in a container
+=====================================================================
+docker run  -it -p 7000:3000 --name reactContainer -v "D:\Docker-Volumes\react:/my-app"  alpine 
+
+apk add --update nodejs
+apk add --update npm 
+npx create-react-app my-app
+cd my-app
+npm start
+
+apk add --update curl
+======================================================================
+
+
+=====================================================================
+STEP 2 : Create a new component HelloWorld.js
+=====================================================================
+1. Navidate to my-app/src folder. This is the folder where App.js and 
+index.js files are located. 
+
+2. Create a new file HelloWorld.js in this folder. Write the following 
+code in the file: 
+
+----------------------------------------------------------------------
+HelloWorld.js
+----------------------------------------------------------------------
+import React from "react";
+
+class HelloWorld extends React.Component { 
+
+	render() {
+		return (
+			<div>
+				<h1>Hello World From React</h1>
+			</div>
+		); 
+		} 
+} 
+
+export default HelloWorld;
+----------------------------------------------------------------------
+
+3. Save this file. 
+======================================================================
+
+======================================================================
+STEP 3 : Change index.js
+======================================================================
+1. The existing index.js file in my-app/src folder renders <App /> in 
+its render method: 
+
+	const root = ReactDOM.createRoot(document.getElementById('root'));
+	root.render(
+	<React.StrictMode>
+		<App />
+	</React.StrictMode>
+	);
+
+2. Remove the <App /> tag from the above code and replace it with 
+<HelloWorld /> : 
+
+	root.render(
+	<React.StrictMode>
+		<HelloWorld />
+	</React.StrictMode>
+	);	
+
+3. Add an import for HelloWorld component: 
+import HelloWorld from './HelloWorld.js';
+
+4. Save index.js file. 
+
+5. Run the project: 
+	npm start
+
+6. From your local computer browse to the url localhost:7000
+You should see the text "Hello World From React" in H1 format. 
+
+NOTE: Since you are using unix container, note that filenames are 
+case sensitive. So if you change the casing of file name in the 
+import statement ( suppose you write Helloworld.js instead of HelloWorld.js)
+you will get a "Module not found: Error : Can't resolve './Helloworld.js'; 
+======================================================================
+
